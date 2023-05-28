@@ -6,11 +6,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Conecta com a versão slim do jQuery através da CDN deles -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <!-- Conecta com jQuery através da CDN deles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Conecta com estilo do Selectize através da cdnjs -->
+    <!-- Conecta com estilo do Bootstrap através da CDN 'jsDelivr' -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Conecta com estilo do Selectize através da CDN 'cdnjs' -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
         integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
@@ -23,6 +28,9 @@
 
     <!-- Conecta com o CSS da página -->
     <link rel="stylesheet" href="www/main-styles.css">
+
+    <!-- Conecta com o script JS que gera o menu Selectize e define o efeito de sua seleção -->
+    <script src="www/selector.js"></script>
 </head>
 
 <body>
@@ -34,7 +42,7 @@
         <div id="sidebar">
 
             <!-- Insere o título da página -->
-            <div id="title">O calendário do Brasileirão</div>
+            <div id="title">O CALENDÁRIO DO BRASILEIRÃO</div>
 
             <!-- Insere tag que irá receber o menu -->
             <select id="menu"></select>
@@ -53,8 +61,6 @@
         </div>
 
     </div>
-
-
 
 </body>
 
