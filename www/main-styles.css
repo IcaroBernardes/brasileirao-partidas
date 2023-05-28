@@ -1,0 +1,26 @@
+/* Configura o body */
+body {
+  margin: 0;
+}
+
+/* Configura o container geral */
+#encompass {
+  display: flex;
+}
+
+/* Configura os containers do menu lateral e do conteúdo */
+#sidebar {
+  width: 20vw;
+  height: 100vh;
+}
+
+#container {
+  width: 80vw;
+  height: 100vh;
+}
+
+/* Configura o iframe com conteúdo */
+#content {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,72 @@
+---
+format:
+  html:
+    css: www/main-styles.css
+execute: 
+  echo: false
+  warning: false
+  error: false
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- Conecta com a fonte "Comfortaa" do Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Conecta com a versão slim do jQuery através da CDN deles -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<!-- Conecta com estilo do Selectize através da cdnjs -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+<!-- Conecta com Selectize através da cdnjs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+```{r}
+
+# Carrega bibliotecas
+library(dplyr)
+library(htmltools)
+
+```
+
+
+```{r}
+
+div(
+  id = "encompass",
+  
+  # Define o menu lateral
+  div(
+    id = "sidebar",
+    
+    ## Insere o título da página
+    div(id = "title", "O calendário do Brasileirão"),
+    
+    ## Insere tag que irá receber o menu
+    htmltools::tags$select(id = "menu"),
+    
+    ## Insere contexto e créditos
+    div(id = "context")
+    
+  ),
+  
+  # Define espaço para o conteúdo
+  div(
+    id = "container",
+    
+    ## Insere iframe que servirá de elo entre a página e o conteúdo
+    htmltools::tags$iframe(
+      id = "content",
+      src = "america-mg.html",
+      width = "100%",
+      height = "100%"
+    )
+    
+  )
+  
+)
+
+```
