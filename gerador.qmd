@@ -28,13 +28,14 @@ library(ggiraph)
 library(ggnewscale)
 library(glue)
 library(purrr)
+library(readr)
 library(stringi)
 library(stringr)
 library(tidyr)
 library(ggpath)
 
 # Carrega o banco de dados de partidas
-matches <- brasileirao::matches
+matches <- readr::read_csv("https://raw.githubusercontent.com/williamorim/brasileirao/master/data-raw/csv/matches.csv")
 
 # Carrega o banco de dados sobre os clubes
 teams <- brasileirao::teams

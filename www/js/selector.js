@@ -13,7 +13,14 @@ $(document).ready(function () {
                 let teamid = '#' + value.split(",")[0];
                 let teampage = value.split(",")[0] + '.html';
                 $(document.documentElement).find('.content').fadeOut('slow');
-                $(document.documentElement).find(teamid).fadeIn('slow');
+                setTimeout(() => {
+                    $(document.documentElement).find('.content').attr('src', '');
+                    $(document.documentElement).find(teamid).attr('src', teampage);
+                  }, 500);                
+                setTimeout(() => {
+                    $(document.documentElement).find(teamid).fadeIn('slow');
+                  }, 1000);
+                
                 
                 // Defina a cor da barra lateral em função do clube
                 let styles = {
