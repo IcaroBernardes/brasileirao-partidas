@@ -29,8 +29,14 @@
     <!-- Conecta com o CSS da página -->
     <link rel="stylesheet" href="www/main-styles.css">
 
+    <!-- Conecta com o script JS que gera as variáveis globais -->
+    <script src="www/js/dataset.js"></script>
+
     <!-- Conecta com o script JS que gera o menu Selectize e define o efeito de sua seleção -->
-    <script src="www/selector.js"></script>
+    <script src="www/js/selector.js"></script>
+
+    <!-- Conecta com o script JS que insere os iframes dentro de #container -->
+    <script src="www/js/builder.js"></script>
 </head>
 
 <body>
@@ -53,12 +59,7 @@
         </div>
 
         <!-- Define espaço para o conteúdo -->
-        <div id="container">
-
-            <!-- Define espaço para o conteúdo -->
-            <iframe id="content" src="flamengo.html"></iframe>
-
-        </div>
+        <div id="container"></div>
 
     </div>
 
