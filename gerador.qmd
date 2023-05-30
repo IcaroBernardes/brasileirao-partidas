@@ -26,6 +26,7 @@ library(forcats)
 library(ggplot2)
 library(ggiraph)
 library(ggnewscale)
+library(ggtext)
 library(glue)
 library(purrr)
 library(readr)
@@ -89,14 +90,63 @@ if (selected_team == "time1") {
         dplyr::slice_sample(n = 380)
       
       dplyr::bind_cols(time, team)
-        
-        
+      
+      
     }) |> 
     dplyr::rowwise() |> 
     dplyr::mutate(score = glue::glue("{sample(1:3, 1)}x{sample(1:3, 1)}"), .before = "away") |> 
     dplyr::ungroup() |> 
     dplyr::mutate(id_match = 1:n(), .before = "season")
   
+  ## Define coordenadas dos itens extras para o gráfico
+  extras_df <- dplyr::tibble(
+    x = c(-30, 0, -18.3),
+    y = c(26.5, 20.1, -16.4),
+    path = glue::glue("www/mouse_{c('click','hover','hover')}.png"),
+    hjust = 0,
+    vjust = 0.5,
+    label = c(
+      "Lista de rivais contra<br>os quais o clube jogou.<br>
+      Clique para destacar partidas<br>contra um clube específico",
+      
+      "Bolhas maiores indicam a pontuação<br>total do clube ao fim da temporada.<br>
+      Sobreponha o mouse para ver os valores.<br><br>
+      Cores indicam a pontuação<br>
+      de 1 <span style='color:#A82A00;'>(vermelho)</span> a 100 <span style='color:#00A81C;'>(verde)</span>.<br>
+      Anos em que o clube esteve<br>fora da série A estão em <span style='color:#636363;'>(cinza)</span>.<br><br>
+      Punições com perdas de<br>
+      pontos estão inclusas:<br>
+      <sub>Barueri (-3pts em 2010); Flamengo (-4pts em 2013);<br>
+      Portuguesa (-4pts em 2013); Santa Cruz (-3pts em 2016)</sub>",
+    
+      "Bolhas menores indicam o resultado de uma partida em uma rodada:<br>
+      vitórias <span style='color:#00CC22;'>(verde)</span>, empates <span style='color:white;'>(branco)</span> e derrotas <span style='color:#EB3B00;'>(vermelho)</span>.<br>
+      Em <span style='color:#636363;'>cinza</span> estão as partidas em que o clube esteve fora da série A.<br><br>
+      Sobreponha o mouse para ver uma tooltip que mostra<br>
+      informações sobre a partida, confrontos passados entre os clubes<br>
+      e desempenho histórico na mesma rodada em temporadas passadas.<br><br>
+      <img src='www/Vtip.png' width='70' /><img src='www/Etip.png' width='70' /><img src='www/Dtip.png' width='70' />"
+    )
+  )
+  
+  ## Gera o itens extras para o gráfico
+  extras_img <- 
+    ggpath::geom_from_path(
+      aes(x = x, y = y, path = path),
+      width = 0.07, height = 0.07, data = extras_df
+    )
+  extras_lbl <- 
+    ggtext::geom_richtext(
+      aes(x = x, y = y, label = label),
+      hjust = 0, vjust = 0.5, nudge_x = 2, lineheight = 1.3,
+      label.colour = NA, fill = "#000000c7", color = "white",
+      label.padding = unit(c(0.45, 0.45, 0.45, 0.45), "lines"),
+      size = 2, family = "Comfortaa", data = extras_df
+    )
+  
+} else {
+  extras_img <- NULL
+  extras_lbl <- NULL
 }
 
 ```
@@ -458,7 +508,9 @@ estatico <- matches |>
   theme(
     legend.position = "none",
     plot.background = element_rect(fill = "black", color = "black")
-  )
+  ) +
+  
+  extras_lbl + extras_img
 
 # Gera a versão interativa do gráfico
 ggiraph::girafe(
