@@ -46,7 +46,6 @@ body {
   overflow-x: hidden;
   display: none;
   position: absolute;
-  transition: all .5s;
 }
 
 /* Configura elementos no menu lateral */

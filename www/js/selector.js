@@ -24,15 +24,24 @@ $(document).ready(function () {
                 }
 
                 // Aplica a id e nome da página do clube selecionado
-                $(document.documentElement).find('.content').fadeOut('slow');
-                setTimeout(() => {
-                    $(document.documentElement).find('.content').attr('src', '');
-                    $(document.documentElement).find(teamid).attr('src', teampage);
-                }, 500);
-                setTimeout(() => {
-                    $(document.documentElement).find(teamid).fadeIn('slow');
-                }, 1500);
+                async function empilhadeira() {
 
+                    await new Promise((resolve) =>
+                        resolve($(document.documentElement).find('.content').fadeOut('slow')),
+                    );
+
+                    await new Promise((resolve) =>
+                        setTimeout(() => resolve($(document.documentElement).find('.content').attr('src', '')), 500),
+                    );                
+
+                    await new Promise((resolve) =>
+                        resolve($(document.documentElement).find(teamid).attr('src', teampage)),
+                    );
+
+                    $(document.documentElement).find(teamid).fadeIn(2000);
+
+                }
+                empilhadeira();
 
                 // Aplica a cor da barra lateral e sua sombra
                 let styles = {
