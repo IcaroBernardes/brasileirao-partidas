@@ -1,6 +1,6 @@
 ---
 params:
-  clube: "Flamengo"
+  clube: "time1"
 format:
   html:
     css: www/pages-styles.css
@@ -37,9 +37,6 @@ library(ggpath)
 # Carrega o banco de dados de partidas
 matches <- readr::read_csv("https://raw.githubusercontent.com/williamorim/brasileirao/master/data-raw/csv/matches.csv")
 
-# Carrega o banco de dados sobre os clubes
-teams <- brasileirao::teams
-
 # "Hackeando" o {ggiraph} para adicionar uma versão interativa do ggpath::geom_from_path
 geom_from_path_interactive <- function(...)
 {ggiraph:::layer_interactive(ggpath::geom_from_path, ...)}
@@ -65,15 +62,53 @@ selected_seasons <- 2006:2023
 
 ```
 
+```{r}
+
+# Operações extras para construção do placeholder com intruções
+if (selected_team == "time1") {
+  
+  ## Sorteia algumas temporadas
+  temp <- sort(sample(x = selected_seasons, size = 7))
+  
+  ## Constrói um toy data para representar as partidas
+  matches <- temp |> 
+    purrr::map_dfr(function (year) {
+      
+      time = dplyr::tibble(
+        season = rep(year, 380),
+        date = seq(as.Date(glue::glue("{year}/4/1")),
+                   as.Date(glue::glue("{year}/12/1")),
+                   length.out = 380)
+      )
+      
+      team = expand.grid(
+        home = glue::glue("time{1:20}"),
+        away = glue::glue("time{1:20}")
+      ) |> 
+        dplyr::filter(home != away) |> 
+        dplyr::slice_sample(n = 380)
+      
+      dplyr::bind_cols(time, team)
+        
+        
+    }) |> 
+    dplyr::rowwise() |> 
+    dplyr::mutate(score = glue::glue("{sample(1:3, 1)}x{sample(1:3, 1)}"), .before = "away") |> 
+    dplyr::ungroup() |> 
+    dplyr::mutate(id_match = 1:n(), .before = "season")
+  
+}
+
+```
 
 ```{r}
 
-# Mantém apenas os anos com 38 partidas, ordena por data
+# Mantém apenas os anos com 38 partidas, ordena por id da partida
 # e converte os anos a factor
 matches <- matches |> 
   dplyr::filter(season %in% selected_seasons) |>
   dplyr::mutate(season = factor(season, levels = selected_seasons)) |> 
-  dplyr::arrange(date)
+  dplyr::arrange(id_match)
 
 # Unifica os nomes dos clubes que mudaram ao longo do tempo
 matches <- matches |> 

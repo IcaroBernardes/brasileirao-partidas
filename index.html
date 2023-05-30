@@ -37,6 +37,18 @@
 
     <!-- Conecta com o script JS que insere os iframes dentro de #container -->
     <script src="www/js/builder.js"></script>
+
+    <!-- Conecta com o script JS que ajusta a fonte para caber em um container -->
+    <script src="www/js/resizeToFit.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            resizeToFit.init(["#context"]);
+        });
+
+        window.addEventListener("resize", function () {
+            resizeToFit.resize();
+        });
+    </script>
 </head>
 
 <body>
@@ -54,7 +66,43 @@
             <select id="menu"></select>
 
             <!-- Insere contexto e créditos -->
-            <div id="context">Autor</div>
+            <div id="context">
+
+                <div id="explanation">
+                    <p>Desde 2006 a Série A do Brasileirão adotou um modelo de 38 rodadas com 20 clubes. O <strong>menu
+                            acima</strong> permite <strong>selecionar</strong> um dos 42 clubes que participaram desse
+                        formato do campeonato em ao menos uma temporada.</p>
+                    <p>Ao selecionar um clube seu <strong>calendário</strong> de resultados é exibido à
+                        <strong>direita</strong>. Há duas formas de interagir com o calendário através do mouse:
+                    </p>
+                </div>
+
+                <div class="mouseicons">
+                    <img src="www/mouse_click.png" />
+                    <img src="www/mouse_hover.png" />
+                    <div>Clique</div>
+                    <div>Hover<div style="font-size: 0.4em;">(sobreposição)</div>
+                    </div>
+                </div>
+
+                <div id="authorship">
+                    <p>Página feita por <strong>Ícaro Bernardes</strong> com R e HTML+CSS+JS. Códigos comentados no <a
+                            href="https://github.com/IcaroBernardes/brasileirao-partidas"
+                            target="_blank">repositório</a>.</p>
+                    <p>Dados obtidos através do pacote <a href="https://github.com/williamorim/brasileirao"
+                            target="_blank">{brasileirao}</a> criado por <a href="https://github.com/williamorim"
+                            target="_blank">William Amorim</a></p>
+                    <p><strong>Perfis digitais:</strong></p>
+                    <p id="profiles">
+                        <a href="https://twitter.com/icarobsc" target="_blank"><span class="glyphs" id="twt"></span></a>
+                        <a href="https://github.com/IcaroBernardes" target="_blank"><span class="glyphs"
+                                id="ghb"></span></a>
+                        <a href="https://www.linkedin.com/in/icarobsc" target="_blank"><span class="glyphs"
+                                id="lkd"></span></a>
+                    </p>
+                </div>
+
+            </div>
 
         </div>
 

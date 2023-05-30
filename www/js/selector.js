@@ -8,24 +8,36 @@ $(document).ready(function () {
             placeholder: 'Selecione um time',
             delimiter: ',',
             onChange: function (value) {
-                console.log(value === "");
-                // Define a id e nome da página do clube selecionado
-                let teamid = '#' + value.split(",")[0];
-                let teampage = value.split(",")[0] + '.html';
+
+                // Define valores em função de haver ou não seleção
+                let teamid = '';
+                let teampage = '';
+                let teamcolor = '';
+                if (value === "") {
+                    teamid = '#time1';
+                    teampage = 'time1.html';
+                    teamcolor = '#202020';
+                } else {
+                    teamid = '#' + value.split(",")[0];
+                    teampage = value.split(",")[0] + '.html';
+                    teamcolor = value.split(",")[1];
+                }
+
+                // Aplica a id e nome da página do clube selecionado
                 $(document.documentElement).find('.content').fadeOut('slow');
                 setTimeout(() => {
                     $(document.documentElement).find('.content').attr('src', '');
                     $(document.documentElement).find(teamid).attr('src', teampage);
-                  }, 500);                
+                }, 500);
                 setTimeout(() => {
                     $(document.documentElement).find(teamid).fadeIn('slow');
-                  }, 1000);
-                
-                
-                // Defina a cor da barra lateral em função do clube
+                }, 1000);
+
+
+                // Aplica a cor da barra lateral e sua sombra
                 let styles = {
-                    backgroundColor: value.split(",")[1],
-                    boxShadow: value.split(",")[1] + " 2px 0 6px 3px"
+                    backgroundColor: teamcolor,
+                    boxShadow: teamcolor + " 2px 0 6px 3px"
                 };
                 $(document.documentElement).find('#sidebar').css(styles);
             }
