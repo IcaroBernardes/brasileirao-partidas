@@ -31,7 +31,7 @@ $(document).ready(function () {
                 }, 500);
                 setTimeout(() => {
                     $(document.documentElement).find(teamid).fadeIn('slow');
-                }, 1000);
+                }, 1500);
 
 
                 // Aplica a cor da barra lateral e sua sombra
