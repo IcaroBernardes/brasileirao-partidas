@@ -14,8 +14,15 @@ Um dos objetivos desse projeto é acrescentar mais ferramentas de interativade �
 
 ### Geração de gráficos interativos em {ggiraph}
 
-![](www/readme/gerador.png)
+📃 Código em [gerador.qmd](https://github.com/IcaroBernardes/calendario-brasileirao/blob/master/gerador.qmd)
 
+Nesse script os dados são processados de sorte a gerar uma visualização na perspectiva de cada um dos clubes. Para tal, os dados foram manejados com abundante uso de {dplyr} e {purrr}. Em seguida, os elementos que compõem a visualização receberam coordenadas no plano cartesiano. Por fim, estes elementos foram agregados para compor o gráfico interativo com {ggiraph}.
+
+![](www/readme/gerador1.png)
+
+É interessante destacar um "hack" que permitiu o uso de imagens também como elementos interativos a partir de uma modificação da função ggpath::geom_from_path(). Além disso, a função do script gerador é ser um template para produção parametrizada dos documentos HTML que irão guardar os gráficos interativos. Tarefa essa extremamente simples de concretizar.
+
+![](www/readme/gerador2.png)
 
 
 
