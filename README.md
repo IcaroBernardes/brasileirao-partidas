@@ -20,11 +20,33 @@ Nesse script os dados são processados de sorte a gerar uma visualização na pe
 
 ![](www/readme/gerador1.png)
 
-É interessante destacar um "hack" que permitiu o uso de imagens também como elementos interativos a partir de uma modificação da função ggpath::geom_from_path(). Além disso, a função do script gerador é ser um template para produção parametrizada dos documentos HTML que irão guardar os gráficos interativos. Tarefa essa extremamente simples de concretizar.
+É interessante destacar um "hack" que permitiu o uso de imagens também como elementos interativos a partir de uma modificação da função `ggpath::geom_from_path()`. Além disso, a função do script gerador é ser um template para produção parametrizada dos documentos HTML que irão guardar os gráficos interativos. Tarefa essa extremamente simples de concretizar.
 
 ![](www/readme/gerador2.png)
 
+### Produção de documentos parametrizados no Quarto
 
+📃 Código em [gatilho.R](https://github.com/IcaroBernardes/calendario-brasileirao/blob/master/gatilho.R)
+
+Nesse script o gerador é ativado para gerar os documentos HTML com os calendários. Isso é realizado com {quarto} e {purrr}. Os parâmetros são passados para o argumento `execute_params` da função `quarto_render()`.
+
+![](www/readme/gatilho1.png)
+
+### Uso do R como suporte ao JS
+
+📃 Código em [utilidades.R](https://github.com/IcaroBernardes/calendario-brasileirao/blob/master/utilidades.R)
+
+Nesse script são criadas variáveis que serão consumidas pelos scripts JS. Para tal, uma tibble é convertida a uma string JSON através da função `jsonlite::toJSON()`. Os bancos de dados são declarados no código como `var`, isto é, variáveis com escopo global. Por fim, a string é escrita em um script JS: [dataset.js](https://github.com/IcaroBernardes/calendario-brasileirao/blob/master/www/js/dataset.js)
+
+![](www/readme/utilidades1.png)
+
+### Produção de páginas com HTML+CSS+JS
+
+📃 Código em [index.html](https://github.com/IcaroBernardes/calendario-brasileirao/blob/master/index.html)
+
+Nesse script são agregados os scripts JS e construídas as estruturas da página de acesso. Eu fiz uso de algumas bibliotecas JS como `jQuery`, `Bootstrap` e `Selectize` e também construí alguns scripts JS. A estrutura do html é bem simples com um estreito menu lateral e conteúdo ocupando maior parte da página, similar a um Shiny app. Os calendários são carregados através da seleção no menu, o qual indica qual página deve ser carregada com iframe.
+
+![](www/readme/index1.png)
 
 ## Créditos
 
