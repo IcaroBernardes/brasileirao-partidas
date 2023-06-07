@@ -34,7 +34,10 @@ clubes <- dplyr::tibble(
             "portuguesa", "santa-cruz", "santo-andre",
             "santos", "sao-caetano", "sao-paulo",
             "sport", "vasco-da-gama", "vitoria")
-) |> 
+)
+
+## Adiciona o tutorial
+clubes <- clubes |> 
   dplyr::add_row(times = "time1", nomes = "time1")
 
 # 1. Geração dos HTML ##########
